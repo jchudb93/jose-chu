@@ -5,6 +5,74 @@ import React from 'react'
 
 import { colors, hexToRgb} from './styles'
 
+
+export const ButtonHighlights = ({ icon, highlights, color }) => {
+    return (
+      <span>
+        {highlights.map(h => (
+          <Button
+            key={shortid.generate()}
+            style={{ margin: '3px' }}
+            color={color}
+            size="small"
+          >
+            <strong>
+              <Icon name={icon} />{h}
+            </strong>
+          </Button>
+        ))}
+      </span>
+    );
+  };
+  
+  ButtonHighlights.propTypes = {
+    icon: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    highlights: PropTypes.arrayOf(PropTypes.string).isRequired,
+  };
+  
+  export const CardHighlights = ({
+    color,
+    title,
+    subtitle,
+    text,
+    highlights,
+  }) => {
+    return (
+      <div
+        style={{
+          borderLeft: `5px solid rgba(${hexToRgb(color)},.5)`,
+          padding: '0px 0px 0px 20px',
+          margin: '0px 0px 20px 0px',
+        }}
+      >
+        {title && <Segment vertical>{title}</Segment>}
+        {subtitle &&
+          <Segment vertical>
+            {subtitle}
+          </Segment>}
+        {text && <Segment vertical>{text}</Segment>}
+        {highlights && <Segment vertical>{highlights}</Segment>}
+      </div>
+    );
+  };
+  
+  CardHighlights.defaultProps = {
+    title: undefined,
+    subtitle: undefined,
+    text: undefined,
+    highlights: undefined,
+  };
+  
+  CardHighlights.propTypes = {
+    color: PropTypes.string.isRequired,
+    title: PropTypes.element,
+    subtitle: PropTypes.element,
+    text: PropTypes.element,
+    highlights: PropTypes.element,
+  };
+  
+
 export const Contact = ({ phone, email, website}) => {
     return(
         
@@ -66,3 +134,5 @@ class ExtLink extends React.Component {
         )
     }
 }
+
+export { ExtLink as default }
